@@ -1,0 +1,58 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: DynamoDB tables for CampusVoice project
+
+Resources:
+  UsersTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: Users
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: UserID
+          AttributeType: S
+      KeySchema:
+        - AttributeName: UserID
+          KeyType: HASH
+      SSESpecification:
+        SSEEnabled: true
+
+  ComplaintsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: Complaints
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: ComplaintID
+          AttributeType: S
+        - AttributeName: Department
+          AttributeType: S
+        - AttributeName: Year
+          AttributeType: N
+        - AttributeName: UserID
+          AttributeType: S
+      KeySchema:
+        - AttributeName: ComplaintID
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: DeptYearIndex
+          KeySchema:
+            - AttributeName: Department
+              KeyType: HASH
+            - AttributeName: Year
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: DepartmentIndex
+          KeySchema:
+            - AttributeName: Department
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+        - IndexName: UserIndex
+          KeySchema:
+            - AttributeName: UserID
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+      SSESpecification:
+        SSEEnabled: true

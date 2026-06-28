@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CampusVoice - Signup</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="signup-body">
+  <div class="signup-container">
+    <h1>Signup</h1>
+    <form id="signupForm">
+      <label for="signupUsername">Username:</label>
+      <input type="text" id="signupUsername" autocomplete="username" required>
+
+      <label for="signupPassword">Password:</label>
+      <div class="input-with-toggle">
+        <input type="password" id="signupPassword" autocomplete="new-password" required>
+        <span id="toggleSignupPassword" class="toggle-eye">👁️</span>
+      </div>
+
+      <label for="role">Role:</label>
+      <select id="role" required onchange="toggleSecretCode()">
+        <option value="Student">Student</option>
+        <option value="Faculty">Faculty</option>
+        <option value="HOD">HOD</option>
+      </select>
+
+      <!-- Secret code field (hidden by default) -->
+      <div id="secretCodeWrapper" style="display:none;">
+        <label for="secretCode">Secret Code:</label>
+        <!-- ✅ No eye toggle here -->
+        <input type="password" id="secretCode" autocomplete="off">
+      </div>
+
+      <label for="department">Department:</label>
+      <select id="department" required>
+        <option value="CSE">CSE</option>
+        <option value="ECE">ECE</option>
+        <option value="EEE">EEE</option>
+        <option value="Mechanical">Mechanical</option>
+        <option value="Civil">Civil</option>
+      </select>
+
+      <label for="year">Year:</label>
+      <select id="year" required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="NA">NA</option> <!-- Only valid for HOD -->
+      </select>
+
+      <button type="submit">Signup</button>
+    </form>
+
+    <div class="signup-footer">
+      <p>Already have an account? <a href="login.html">Login here</a></p>
+    </div>
+  </div>
+
+  <script>
+    // Show secret code field for Faculty/HOD
+    function toggleSecretCode() {
+      const role = document.getElementById("role").value;
+      const wrapper = document.getElementById("secretCodeWrapper");
+      wrapper.style.display = (role === "Faculty" || role === "HOD") ? "block" : "none";
+    }
+  </script>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CampusVoice - Timeline</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="dashboard-header">
+    <h1>Complaint Timeline</h1>
+    <nav>
+      <!-- Role-aware dashboard link -->
+      <a id="dashboardLink">Dashboard</a>
+      <a href="publicboard.html">Public Board</a>
+      <a href="login.html" onclick="localStorage.clear()">Logout</a>
+    </nav>
+  </header>
+
+  <main class="dashboard-main">
+    <section class="complaints-list-section">
+      <h2>All Complaints (Chronological)</h2>
+      <table id="timeline-table" class="complaints-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>User</th>
+            <th>Department</th>
+            <th>Year</th>
+            <th>Category</th>
+            <th>Priority</th>
+            <th>Text</th>
+            <th>Status</th>
+            <th>Created At</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Filled dynamically -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 CampusVoice</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const role = (localStorage.getItem("role") || "").toLowerCase();
+  let dashboardHref = "dashboard.html"; // default student
+  if (role === "faculty") dashboardHref = "faculty.html";
+  else if (role === "hod") dashboardHref = "hod.html";
+
+  const dashboardLink = document.getElementById("dashboardLink");
+  if (dashboardLink) {
+    dashboardLink.setAttribute("href", dashboardHref);
+  }
+
+  loadTimelineComplaints();
+});
+  </script>
+</body>
+</html>

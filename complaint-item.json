@@ -1,0 +1,9 @@
+{
+  "ComplaintID": { "S": "CMP001" },
+  "UserID": { "S": "student01" },
+  "Department": { "S": "CSE" },
+  "Year": { "N": "2" },
+  "Text": { "S": "Projector not working in classroom" },
+  "Status": { "S": "Pending" },
+  "CreatedAt": { "S": "2026-06-27T12:05:00Z" }
+}
